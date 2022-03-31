@@ -95,9 +95,49 @@ def breakingRecords(scores):
 def birthday(s, d, m):
     count = 0
     for i in range(len(s)):
-        print (s[i:i+m])
         if sum(s[i:i+m]) == d:
             count += 1
     return count
 
-print(birthday([1, 2, 1, 3, 2], 3, 3))
+#print(birthday([1, 2, 1, 3, 2], 3, 3))
+
+
+#
+# Complete the 'divisibleSumPairs' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1,,. INTEGER n
+#  2,. INTEGER k
+#  3,. INTEGER_ARRAY ar
+#
+def divisibleSumPairs(n, k, ar):
+    count = 0
+    for i in range(n):
+        for j in range(i+1, n):
+            if((ar[i] + ar[j]) % k == 0):
+                count += 1
+    return count
+
+# print(divisibleSumPairs(6, 3, [1, 3, 2, 6, 1, 2]))
+
+#
+# Complete the 'migratoryBirds' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+def migratoryBirds(arr):
+    count = {}
+    for i in arr:
+        if i in count:
+            count[i] += 1
+        else:
+            count[i] = 1
+    max_val = max(count.values())
+    min_val = min([k for k, v in count.items() if v==max_val])
+    for key, value in count.items():
+        if value == max_val and min_val == key:
+            return key
+
+print(migratoryBirds([1,4,4,4,5,3]))
