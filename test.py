@@ -1,3 +1,6 @@
+from turtle import st
+
+
 def gradingStudents(grades):
     result = []
     for i in grades:
@@ -140,4 +143,47 @@ def migratoryBirds(arr):
         if value == max_val and min_val == key:
             return key
 
-print(migratoryBirds([1,4,4,4,5,3]))
+#print(migratoryBirds([1,4,4,4,5,3]))
+
+#
+# Complete the 'dayOfProgrammer' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts INTEGER year as parameter.
+#
+def dayOfProgrammer(year):
+    if year < 1918:
+        if year % 4 == 0:
+            return "12.09." + str(year)
+        else:
+            return "13.09." + str(year)
+    else:
+        if year == 1918:
+            return "26.09 " + str(year)
+        if year % 400 == 0:
+            return "12.09." + str(year)
+        elif year % 4 == 0 and year % 100 != 0:
+            return "12.09." + str(year)
+        else:
+            return "13.09." + str(year)
+
+#print(dayOfProgrammer(2016))
+
+#
+# Complete the 'bonAppetit' function below.
+#
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY bill
+#  2. INTEGER k
+#  3. INTEGER b
+#
+def bonAppetit(bill, k, b):
+    bill.pop(k)
+    total = sum(bill)
+    if total / 2 == b:
+        print ("Bon Appetit")
+    else:
+        print (int(b - total / 2))
+
+bonAppetit([3,10,2,9], 1, 12)
+
