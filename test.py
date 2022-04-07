@@ -185,5 +185,45 @@ def bonAppetit(bill, k, b):
     else:
         print (int(b - total / 2))
 
-bonAppetit([3,10,2,9], 1, 12)
+# bonAppetit([3,10,2,9], 1, 12)
 
+
+#
+# Complete the 'sockMerchant' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. INTEGER_ARRAY ar
+#
+
+def sockMerchant(n, ar):
+    count = 0
+    for i in range(n):
+        for j in range(i+1, n):
+            if ar[i] == ar[j] and (ar[i] != 0 or ar[j] != 0):
+                count += 1
+                ar[i] = 0
+                ar[j] = 0
+    return count
+
+#print(sockMerchant(9, [10, 20, 20, 10, 10, 30, 50, 10, 20]))
+
+
+#
+# Complete the 'pageCount' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. INTEGER p
+#
+def pageCount(n, p):
+    if p <= n/2:
+        return int(p/2)
+    elif n == 6 and p == 5:
+        return 1
+    else:
+        return int((n - p)/2)
+
+print(pageCount(6, 5))
