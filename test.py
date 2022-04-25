@@ -223,7 +223,42 @@ def pageCount(n, p):
         return int(p/2)
     elif n == 6 and p == 5:
         return 1
-    else:
+    else:   
         return int((n - p)/2)
 
-print(pageCount(6, 5))
+#print(pageCount(6, 5))
+
+#
+# Complete the 'countingValleys' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER steps
+#  2. STRING path
+#
+def countingValleys(steps, path):
+    count = 0
+    level = 0
+    for i in path:
+        if i == 'U':
+            level += 1
+        else:
+            level -= 1
+        if level == 0 and i == 'U':
+            count += 1
+    return count
+
+#print(countingValleys(8, 'UDDDUDUU'))
+
+def getMoneySpent(keyboards, drives, b):
+    max_val = 0
+    for i in keyboards:
+        for j in drives:
+            if i + j <= b and i + j > max_val:
+                max_val = i + j
+    if max_val == 0:
+        return -1
+    else:
+        return max_val
+
+print(getMoneySpent([4], [5], 5))
