@@ -250,6 +250,10 @@ def countingValleys(steps, path):
 
 #print(countingValleys(8, 'UDDDUDUU'))
 
+
+#
+# Complete the getMoneySpent function below.
+#
 def getMoneySpent(keyboards, drives, b):
     max_val = 0
     for i in keyboards:
@@ -261,4 +265,95 @@ def getMoneySpent(keyboards, drives, b):
     else:
         return max_val
 
-print(getMoneySpent([4], [5], 5))
+#print(getMoneySpent([4], [5], 5))
+
+# Complete the catAndMouse function below.
+def catAndMouse(x, y, z):
+    if abs(x - z) < abs(y - z):
+        return "Cat A"
+    elif abs(x - z) > abs(y - z):
+        return "Cat B"
+    else:
+        return "Mouse C"
+
+#print(catAndMouse(1, 3, 2))
+
+#
+# Complete the 'formingMagicSquare' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts 2D_INTEGER_ARRAY s as parameter.
+#
+def formingMagicSquare(s):
+    magic_squares = [[[8, 1, 6], [3, 5, 7], [4, 9, 2]],
+                    [[6, 1, 8], [7, 5, 3], [2, 9, 4]],
+                    [[4, 9, 2], [3, 5, 7], [8, 1, 6]],
+                    [[2, 9, 4], [7, 5, 3], [6, 1, 8]],
+                    [[8, 3, 4], [1, 5, 9], [6, 7, 2]],
+                    [[4, 3, 8], [9, 5, 1], [2, 7, 6]],
+                    [[6, 7, 2], [1, 5, 9], [8, 3, 4]],
+                    [[2, 7, 6], [9, 5, 1], [4, 3, 8]]]
+    min_val = 1000
+    for i in range(len(magic_squares)):
+        val = 0
+        for j in range(len(magic_squares[i])):
+            for k in range(len(magic_squares[i][j])):
+                val += abs(s[j][k] - magic_squares[i][j][k])
+        if val < min_val:
+            min_val = val
+    return min_val
+
+#print(formingMagicSquare([[4, 9, 2], [3, 5, 7], [8, 1, 5]]))
+
+#
+# Complete the 'pickingNumbers' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts INTEGER_ARRAY a as parameter.
+#
+def pickingNumbers(a):
+    a.sort()
+    max_val = 0
+    for i in range(len(a)):
+        count = 1
+        for j in range(i+1, len(a)):
+            if a[j] - a[i] == 1 or a[j] - a[i] == 0:
+                count += 1
+            else:
+                break
+        if count > max_val:
+            max_val = count
+    return max_val
+
+#print(pickingNumbers([1, 2, 2, 3, 1, 2]))
+
+#
+# Complete the 'climbingLeaderboard' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY ranked
+#  2. INTEGER_ARRAY player
+#
+def climbingLeaderboard(ranked, player):
+    ranked = list(set(ranked))
+    ranked.sort()
+    player.sort()
+    l = len(player)
+    i = 0
+    j = 0
+    res = []
+    while i < l and j < len(ranked):
+        if player[i] < ranked[j] and j == 0:
+            res.append(len(ranked) + 1)
+        elif player[i] < ranked[j] and j > 0 :
+            res.append(len(ranked) - j)
+        elif player[i] == ranked[j]:
+            res.append(j)
+        elif player[i] > ranked[j]:
+            res.append(len(ranked) - j)
+        j += 1
+        i += 1
+    return res
+    
+print(climbingLeaderboard([100, 100, 50, 40, 40, 20, 10], [5, 25, 50, 120]))
