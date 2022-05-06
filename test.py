@@ -336,24 +336,161 @@ def pickingNumbers(a):
 #  2. INTEGER_ARRAY player
 #
 def climbingLeaderboard(ranked, player):
-    ranked = list(set(ranked))
-    ranked.sort()
-    player.sort()
-    l = len(player)
-    i = 0
+    ranked = sorted(list(set(ranked)), reverse=True)
+    player = sorted(player, reverse=True)
+
+    l = len(ranked)
     j = 0
+
     res = []
-    while i < l and j < len(ranked):
-        if player[i] < ranked[j] and j == 0:
-            res.append(len(ranked) + 1)
-        elif player[i] < ranked[j] and j > 0 :
-            res.append(len(ranked) - j)
-        elif player[i] == ranked[j]:
-            res.append(j)
-        elif player[i] > ranked[j]:
-            res.append(len(ranked) - j)
-        j += 1
-        i += 1
+
+    for i in range(len(player)):
+        while j < l and player[i] < ranked[j]:
+            j += 1
+        res.append(j + 1)
+    
+    return res[::-1]
+
+#print(climbingLeaderboard([100, 90, 90, 80, 75, 60], [50, 65, 77, 90, 102]))
+
+#
+# Complete the 'hurdleRace' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER k
+#  2. INTEGER_ARRAY height
+#
+def hurdleRace(k, height):
+    max_val = max(height)
+    if max_val <= k:
+        return 0
+    else:
+        return max_val - k
+
+#print(hurdleRace(7, [1, 6, 3, 5, 2]))
+
+#
+# Complete the 'designerPdfViewer' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY h
+#  2. STRING word
+#
+def designerPdfViewer(h, word):
+    max_val = 0
+    for i in word:
+        if h[ord(i) - 97] > max_val:
+            max_val = h[ord(i) - 97]
+    return max_val * len(word)
+
+#print(designerPdfViewer([1, 3, 1, 3, 1, 4, 1, 3, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7], "zaba"))
+
+#
+# Complete the 'utopianTree' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts INTEGER n as parameter.
+#
+
+def utopianTree(n):
+    if n == 0:
+        return 1
+    elif n % 2 == 0:
+        return utopianTree(n-1) + 1
+    else:
+        return utopianTree(n-1) * 2
+
+#print(utopianTree(4))
+
+#
+# Complete the 'angryProfessor' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts following parameters:
+#  1. INTEGER k
+#  2. INTEGER_ARRAY a
+#
+
+def angryProfessor(k, a):
+    count = 0
+    for i in a:
+        if i <= 0:
+            count += 1
+    if count >= k:
+        return "NO"
+    else:
+        return "YES"
+
+#print(angryProfessor(3, [-1, -3, 4, 2]))
+
+#
+# Complete the 'beautifulDays' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER i
+#  2. INTEGER j
+#  3. INTEGER k
+#
+
+def beautifulDays(i, j, k):
+    count = 0
+    for num in range(i, j+1):
+        rev_num = int(str(num)[::-1])
+        if (num - rev_num) % k == 0:
+            count += 1
+    return count
+
+#print(beautifulDays(20, 23, 6))
+
+#
+# Complete the 'viralAdvertising' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts INTEGER n as parameter.
+#
+def viralAdvertising(n):
+    shared = 5
+    cumulative = 0
+    for i in range(n):
+        liked = int(shared / 2)
+        cumulative += liked
+        shared = liked * 3
+    return cumulative
+
+#print(viralAdvertising(3))
+
+#
+# Complete the 'saveThePrisoner' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. INTEGER m
+#  3. INTEGER s
+#
+
+def saveThePrisoner(n, m, s):
+    return ((s - 2 + m) % n) + 1
+
+#print(saveThePrisoner(5, 2, 2))
+
+#
+# Complete the 'circularArrayRotation' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY a
+#  2. INTEGER k
+#  3. INTEGER_ARRAY queries
+#
+def circularArrayRotation(a, k, queries):
+    k = k % len(a)
+    res = []
+    for i in queries:
+        res.append(a[(i - k) % len(a)])
     return res
     
-print(climbingLeaderboard([100, 100, 50, 40, 40, 20, 10], [5, 25, 50, 120]))
+print(circularArrayRotation([1, 2, 3], 2, [0, 1, 2]))
